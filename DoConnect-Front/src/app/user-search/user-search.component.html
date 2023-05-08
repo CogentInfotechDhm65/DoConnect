@@ -2,23 +2,11 @@
 <div *ngIf="questions && questions.length ">
   <div class="question-card-container">
     <div class="question-card" *ngFor="let q of questions">
-      <mat-card>
+      <mat-card *ngIf="isApproved(q)">
         <mat-card-header>
           <mat-card-title>
             <div class="question-topic-icon"></div>
-            <ng-container *ngIf="isApproved(q); then questionApproved; else questionStillPending"></ng-container>
-            <ng-template #questionApproved>
-              <a [routerLink]="['/questionforum', q.id]" href="/questionforum">{{q.title}}</a>
-            </ng-template>
-            <ng-template #questionStillPending>
-              {{q.title}}
-            </ng-template>
-            <!-- <div *ngIf="!isPending(q); else questionStillPending">
-              <a [routerLink]="['/questionforum', q.id]" href="/questionforum">{{q.title}}</a>
-            </div>
-            <div #questionStillPending>
-              {{q.title}}
-            </div> -->
+            <a [routerLink]="['/questionforum', q.id]" href="/questionforum">{{q.title}}</a>
           </mat-card-title>
           <mat-card-subtitle>
             {{q.topic}}
@@ -43,7 +31,6 @@
     </div>
   </div>
 </div>
-
 <div *ngIf="(questions.length == 0)">
 No results found.
 </div>

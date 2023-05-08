@@ -14,8 +14,8 @@ import cogent.infotech.com.entity.User;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 	
-	 @Query(value = "SELECT * FROM question WHERE description_question LIKE %:keyword%", nativeQuery = true)
-	    List<Question> findByDescriptionQuestionContaining(String keyword);
+	 @Query(value = "SELECT * FROM question WHERE description_question LIKE %:keyword% AND status=:status", nativeQuery = true)
+	    List<Question> findByDescriptionQuestionContaining(String keyword, String status);
 	 
 	List<Question> findByStatus(String status);
 	
